@@ -1,3 +1,16 @@
+<!-- nas,falaq,ikhlas,lahab,nasr,kafirun,kaosar,maun,kuraish,fil,asr -->
+<!--
+
+
+recitation
+https://youtube.com/playlist?list=PLO7EjtQN4D8Bv7Q34xTfOFf6CyjMeqTvx&si=P2F5Ps78LzeVegug
+
+
+audio clips
+https://www.youtube.com/@adam-islam
+
+ -->
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
