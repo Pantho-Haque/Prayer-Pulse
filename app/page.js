@@ -1,27 +1,52 @@
 "use client";
 
-import { useState } from "react";
 import { Player } from "@/components";
-import SimpleAudioPlayer from "@/components/player";
+import { useState } from "react";
 
 export default function Home() {
   const audioFiles = [
+    "/assets/audios/allah-hu-akbar.mp3",
     "/assets/audios/112-al-ikhlas.mp3",
     "/assets/audios/107-al-maun.mp3",
+    "/assets/audios/allah-hu-akbar.mp3",
+    "/assets/audios/subhana-rabbil-ajim.mp3",
+    "/assets/audios/allah-hu-akbar.mp3",
+    "/assets/audios/subhana-rabbil-ala.mp3",
+    "/assets/audios/rabbig-firli.mp3",
+    "/assets/audios/subhana-rabbil-ala.mp3",
     // Add more audio file paths here
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [playAudio, setPlayAudio] = useState(false);
 
   const handlePlayButtonClick = () => {
     setPlayAudio(true);
   };
 
+  const handleAudioEnd = () => {
+    if (currentIndex < audioFiles.length - 1) {
+      setTimeout(() => {
+        setCurrentIndex(currentIndex + 1);
+      }, 2000);
+    } else {
+      setPlayAudio(false); // Stop playback after the last file
+      setCurrentIndex(0);  // Reset to the first file
+    }
+  };
+
   return (
     <main>
-      <SimpleAudioPlayer src="/assets/audios/112-al-ikhlas.mp3" triggerPlay={playAudio} />
-      <button onClick={handlePlayButtonClick}>Play Audio</button>
+      {playAudio && (
+        <Player
+          src={audioFiles[currentIndex]}
+          onEnded={handleAudioEnd}
+        />
+      )}
+
+      <button onClick={handlePlayButtonClick} disabled={playAudio}>
+        Play Audio
+      </button>
     </main>
   );
-
 }

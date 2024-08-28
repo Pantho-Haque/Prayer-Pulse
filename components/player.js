@@ -1,34 +1,22 @@
-"use client"; // Ensure the component runs on the client side
+"use client";
 
 import React, { useRef, useEffect } from "react";
 
-export default function SimpleAudioPlayer({ src, triggerPlay }) {
+export default function Player({ src, onEnded }) {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    const handleAudioEnd = () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0; // Reset to the start
-      }
-    };
-
     if (audioRef.current) {
-      audioRef.current.addEventListener("ended", handleAudioEnd);
+      audioRef.current.play();
+      audioRef.current.addEventListener("ended", onEnded);
     }
 
     return () => {
       if (audioRef.current) {
-        audioRef.current.removeEventListener("ended", handleAudioEnd);
+        audioRef.current.removeEventListener("ended", onEnded);
       }
     };
-  }, []);
-
-  useEffect(() => {
-    if (triggerPlay && audioRef.current) {
-      audioRef.current.play();
-    }
-  }, [triggerPlay]);
+  }, [src]);
 
   return <audio ref={audioRef} src={src} />;
 }
