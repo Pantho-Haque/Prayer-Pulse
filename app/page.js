@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {Player} from "@/components";
+import { Player } from "@/components";
+import SimpleAudioPlayer from "@/components/player";
 
 export default function Home() {
   const audioFiles = [
@@ -10,26 +11,17 @@ export default function Home() {
     // Add more audio file paths here
   ];
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [playAudio, setPlayAudio] = useState(false);
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-  };
-
-  const handleEnd = () => {
-    setIsPlaying(false);
+  const handlePlayButtonClick = () => {
+    setPlayAudio(true);
   };
 
   return (
     <main>
-      <Player srcArray={audioFiles} onEnd={handleEnd} />
-      <button
-        onClick={handlePlay}
-        disabled={isPlaying}
-        className="btn btn-primary mt-4"
-      >
-        {isPlaying ? "Playing..." : "Play Audio"}
-      </button>
+      <SimpleAudioPlayer src="/assets/audios/112-al-ikhlas.mp3" triggerPlay={playAudio} />
+      <button onClick={handlePlayButtonClick}>Play Audio</button>
     </main>
   );
+
 }
